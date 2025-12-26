@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - R. Lamsal Books</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF6600;
+            --bg-light: #F8F9FA;
+            --text: #2D2D2D;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-light);
+            margin: 0;
+            color: var(--text);
+        }
+
+        /* Login Overlay */
+        #loginOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #loginBox {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            width: 300px;
+        }
+
+        #loginBox input {
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* Dashboard */
+        #dashboard {
+            display: none;
+        }
+
+        header {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tab {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            font-weight: 500;
+            color: #666;
+        }
+
+        .tab.active {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Content */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .data-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .meta {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+        }
+
+        .info h3 {
+            margin: 0 0 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .info p {
+            margin: 0 0 0.5rem;
+            color: #555;
+        }
+
+        .details {
+            background: #fff5eb;
+            padding: 0.5rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-delete {
+            background: #ff4444;
+        }
+
+        .btn-reply {
+            background: #4CAF50;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Dashboard -->
+    <div id="dashboard" style="display:block">
+        <header>
+            <h2>📚 Shop Admin</h2>
+            <button id="logoutBtn" style="background:#333">Logout</button>
+        </header>
+
+        <div class="container">
+            <div class="tabs">
+                <div class="tab active" onclick="switchTab('stock')">Stock Inquiries</div>
+                <div class="tab" onclick="switchTab('requests')">New Requests</div>
+                <div class="tab" onclick="switchTab('arrivals')">Running Late/Arrivals</div>
+                <div class="tab" onclick="switchTab('reviews')">Reviews</div>
+            </div>
+
+            <div id="stock" class="tab-content active">
+                <h3>Stock Inquiries</h3>
+                <div id="stockList">Loading...</div>
+            </div>
+
+            <div id="requests" class="tab-content">
+                <h3>New Item Requests</h3>
+                <div id="requestList">Loading...</div>
+            </div>
+
+            <div id="arrivals" class="tab-content">
+                <h3>Customer Arrivals</h3>
+                <div id="arrivalList">Loading...</div>
+            </div>
+
+            <div id="reviews" class="tab-content">
+                <h3>Community Reviews</h3>
+                <div id="reviewList">Loading...</div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="admin.js"></script>
+    <script>
+        window.switchTab = function (tabId) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+            document.querySelector(`.tab[onclick="switchTab('${tabId}')"]`).classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+    </script>
+</body>
+
+</html>

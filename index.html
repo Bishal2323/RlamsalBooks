@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R. Lamsal Books & Stationery</title>
+    <meta name="description"
+        content="R. Lamsal Books & Stationery - Your local shop for books, gifts, and office supplies in Pokhara.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Firebase SDKs will be loaded here later -->
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">R. Lamsal Books</a>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#categories">Products</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#footer">Contact</a></li>
+                <li><a href="login.html" style="color: var(--primary); font-weight: bold;">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="hero">
+        <div class="container hero-content">
+            <span class="badge">Serving Pokhara since 2013</span>
+            <h1>Your Trusted Local Stationery & Book House</h1>
+            <p>From school essentials to special gifts, finding what you need has never been easier. Order online, pick
+                up in-store.</p>
+            <div class="hero-buttons">
+                <a href="#categories" class="btn btn-primary">Browse Products</a>
+                <a href="#stock-inquiry" class="btn btn-outline">Check Stock</a>
+            </div>
+            <div class="shop-info-cards">
+                <div class="info-card">
+                    <div class="icon">📍</div>
+                    <div>
+                        <h3>Visit Us</h3>
+                        <p>Rastra Bank Rd, Pokhara 33700</p>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="icon">📞</div>
+                    <div>
+                        <h3>Call Us</h3>
+                        <p>+977 98460 55675</p>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="icon">🕒</div>
+                    <div>
+                        <h3>Open Daily</h3>
+                        <p>8:00 AM - 8:00 PM (Closed Sun)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Product Categories -->
+    <section id="categories" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Browse Our Collection</h2>
+                <p>Everything you need, organized for you.</p>
+            </div>
+            <div class="category-grid">
+                <!-- Category Cards -->
+                <div class="category-card" data-category="birthday">
+                    <div class="card-image placeholder-orange">🎁</div>
+                    <div class="card-content">
+                        <h3>Birthday Gifts</h3>
+                        <p>Cards, decorations, and special surprises.</p>
+                        <span class="link-text">View Gallery &rarr;</span>
+                    </div>
+                </div>
+                <div class="category-card" data-category="kids">
+                    <div class="card-image placeholder-blue">🧸</div>
+                    <div class="card-content">
+                        <h3>Kids Corner</h3>
+                        <p>Early learning toys and school essentials.</p>
+                        <span class="link-text">View Gallery &rarr;</span>
+                    </div>
+                </div>
+                <div class="category-card" data-category="stationery">
+                    <div class="card-image placeholder-green">✏️</div>
+                    <div class="card-content">
+                        <h3>Regular Stationery</h3>
+                        <p>Office supplies, notebooks, and pens.</p>
+                        <span class="link-text">View Gallery &rarr;</span>
+                    </div>
+                </div>
+                <div class="category-card" data-category="games">
+                    <div class="card-image placeholder-red">⚽</div>
+                    <div class="card-content">
+                        <h3>Games & Sports</h3>
+                        <p>Rubik's cubes, footballs, volleyballs.</p>
+                        <span class="link-text">View Gallery &rarr;</span>
+                    </div>
+                </div>
+                <div class="category-card" data-category="books">
+                    <div class="card-image placeholder-yellow">📚</div>
+                    <div class="card-content">
+                        <h3>Books</h3>
+                        <p>Fiction, non-fiction, and study guides (Class 8-10).</p>
+                        <span class="link-text">View Gallery &rarr;</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services / Forms Section -->
+    <section id="services" class="section bg-light">
+        <div class="container">
+            <div class="section-header">
+                <h2>How Can We Help?</h2>
+                <p>Use our digital services to save time.</p>
+            </div>
+
+            <div class="services-grid">
+                <!-- Stock Inquiry Form -->
+                <div class="service-box" id="stock-inquiry">
+                    <h3>🔍 Do We Have It?</h3>
+                    <p>Ask about stock availability before you visit.</p>
+                    <form id="stockForm" class="app-form">
+                        <input type="text" placeholder="Item Name / Description" required>
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="tel" placeholder="Phone Number" required>
+                        <button type="submit" class="btn btn-primary">Check Stock</button>
+                    </form>
+                </div>
+
+                <!-- Product Request Form -->
+                <div class="service-box">
+                    <h3>🛍️ New Item Request</h3>
+                    <p>Need something specific? We'll bring it for you.</p>
+                    <form id="requestForm" class="app-form">
+                        <input type="text" placeholder="What item do you need?" required>
+                        <textarea placeholder="Any specific details (brand, color, etc.)?"></textarea>
+                        <button type="submit" class="btn btn-secondary">Request Item</button>
+                    </form>
+                </div>
+
+                <!-- Arrival Notifier -->
+                <div class="service-box">
+                    <h3>🏃 I'm Coming Soon</h3>
+                    <p>Let us know when you're arriving so we can be ready.</p>
+                    <form id="arrivalForm" class="app-form">
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="time" required>
+                        <textarea placeholder="List items to prepare..."></textarea>
+                        <button type="submit" class="btn btn-outline">Notify Shop</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Community Reviews</h2>
+                <button class="btn btn-sm btn-outline" onclick="openReviewModal()">Write a Review</button>
+            </div>
+            <div class="reviews-wrapper">
+                <!-- Reviews will be populated by JS -->
+                <p class="text-center text-muted">Loading reviews...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container footer-content">
+            <div class="footer-col">
+                <h3>R. Lamsal Books</h3>
+                <p>Serving our community with quality stationery and books for over a decade.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <p>Email: rlamsalbooks@gmail.com</p>
+                <p>Phone: +977 98460 55675</p>
+                <p>Location: Rastra Bank Rd, Pokhara 33700</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="#home">Home</a>
+                <a href="#categories">Products</a>
+                <a href="#services">Services</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 R. Lamsal Books & Stationery. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Gallery Modal -->
+    <div id="galleryModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 id="modalTitle">Category Name</h2>
+            <div class="gallery-grid" id="modalGallery">
+                <!-- Images will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Modal -->
+    <div id="reviewModal" class="modal">
+        <div class="modal-content small-modal">
+            <span class="close-modal-review">&times;</span>
+            <h2>Write a Review</h2>
+            <form id="reviewForm" class="app-form">
+                <input type="text" placeholder="Your Name" required>
+                <div class="star-rating">
+                    <!-- Simple star input placeholder -->
+                    <select required>
+                        <option value="5">★★★★★ Excellent</option>
+                        <option value="4">★★★★☆ Good</option>
+                        <option value="3">★★★☆☆ Average</option>
+                        <option value="2">★★☆☆☆ Poor</option>
+                        <option value="1">★☆☆☆☆ Terrible</option>
+                    </select>
+                </div>
+                <textarea placeholder="Share your experience..." required></textarea>
+                <button type="submit" class="btn btn-primary">Submit Review</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,112 @@
+[debug] [2025-12-25T23:16:38.207Z] ----------------------------------------------------------------------
+[debug] [2025-12-25T23:16:38.210Z] Command:       /usr/local/bin/node /usr/local/bin/firebase init
+[debug] [2025-12-25T23:16:38.210Z] CLI Version:   15.1.0
+[debug] [2025-12-25T23:16:38.210Z] Platform:      darwin
+[debug] [2025-12-25T23:16:38.210Z] Node Version:  v22.18.0
+[debug] [2025-12-25T23:16:38.210Z] Time:          Thu Dec 25 2025 17:16:38 GMT-0600 (Central Standard Time)
+[debug] [2025-12-25T23:16:38.210Z] ----------------------------------------------------------------------
+[debug] 
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/bishallamsal/Desktop/R lamsal books and stationary 
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] 
+[debug] [2025-12-25T23:17:30.448Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-12-25T23:17:30.449Z] > authorizing via signed-in user (bishallamsal2323@gmail.com)
+[debug] [2025-12-25T23:17:30.450Z] Checked if tokens are valid: true, expires at: 1766708177012
+[debug] [2025-12-25T23:17:30.450Z] Checked if tokens are valid: true, expires at: 1766708177012
+[debug] [2025-12-25T23:17:30.452Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2025-12-25T23:17:30.829Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2025-12-25T23:17:30.829Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] 
+=== Dataconnect Setup
+[info] i  dataconnect: ensuring required API firebasedataconnect.googleapis.com is enabled... 
+[debug] [2025-12-25T23:17:42.689Z] Checked if tokens are valid: true, expires at: 1766708177012
+[debug] [2025-12-25T23:17:42.689Z] Checked if tokens are valid: true, expires at: 1766708177012
+[info] i  dataconnect: ensuring required API sqladmin.googleapis.com is enabled... 
+[debug] [2025-12-25T23:17:42.689Z] Checked if tokens are valid: true, expires at: 1766708177012
+[debug] [2025-12-25T23:17:42.689Z] Checked if tokens are valid: true, expires at: 1766708177012
+[debug] [2025-12-25T23:17:42.689Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/r-lamsal-books-backend/services/firebasedataconnect.googleapis.com [none]
+[debug] [2025-12-25T23:17:42.690Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/r-lamsal-books-backend/services/firebasedataconnect.googleapis.com x-goog-quota-user=projects/r-lamsal-books-backend
+[debug] [2025-12-25T23:17:42.691Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/r-lamsal-books-backend/services/sqladmin.googleapis.com [none]
+[debug] [2025-12-25T23:17:42.691Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/r-lamsal-books-backend/services/sqladmin.googleapis.com x-goog-quota-user=projects/r-lamsal-books-backend
+[debug] [2025-12-25T23:17:43.092Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/r-lamsal-books-backend/services/firebasedataconnect.googleapis.com 200
+[debug] [2025-12-25T23:17:43.092Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/r-lamsal-books-backend/services/firebasedataconnect.googleapis.com [omitted]
+[warn] ⚠  dataconnect: missing required API firebasedataconnect.googleapis.com. Enabling now... 
+[debug] [2025-12-25T23:17:43.093Z] Checked if tokens are valid: true, expires at: 1766708177012
+[debug] [2025-12-25T23:17:43.093Z] Checked if tokens are valid: true, expires at: 1766708177012
+[debug] [2025-12-25T23:17:43.093Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/r-lamsal-books-backend/services/firebasedataconnect.googleapis.com:enable [none]
+[debug] [2025-12-25T23:17:43.093Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/r-lamsal-books-backend/services/firebasedataconnect.googleapis.com:enable x-goog-quota-user=projects/r-lamsal-books-backend
+[debug] [2025-12-25T23:17:43.095Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/r-lamsal-books-backend/services/sqladmin.googleapis.com 200
+[debug] [2025-12-25T23:17:43.095Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/r-lamsal-books-backend/services/sqladmin.googleapis.com [omitted]
+[warn] ⚠  dataconnect: missing required API sqladmin.googleapis.com. Enabling now... 
+[debug] [2025-12-25T23:17:43.095Z] Checked if tokens are valid: true, expires at: 1766708177012
+[debug] [2025-12-25T23:17:43.095Z] Checked if tokens are valid: true, expires at: 1766708177012
+[debug] [2025-12-25T23:17:43.095Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/r-lamsal-books-backend/services/sqladmin.googleapis.com:enable [none]
+[debug] [2025-12-25T23:17:43.095Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/r-lamsal-books-backend/services/sqladmin.googleapis.com:enable x-goog-quota-user=projects/r-lamsal-books-backend
+[debug] [2025-12-25T23:17:43.484Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/r-lamsal-books-backend/services/firebasedataconnect.googleapis.com:enable 200
+[debug] [2025-12-25T23:17:43.484Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/r-lamsal-books-backend/services/firebasedataconnect.googleapis.com:enable [omitted]
+[debug] [2025-12-25T23:17:43.492Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/r-lamsal-books-backend/services/sqladmin.googleapis.com:enable 200
+[debug] [2025-12-25T23:17:43.492Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/r-lamsal-books-backend/services/sqladmin.googleapis.com:enable [omitted]
+[debug] [2025-12-25T23:17:53.502Z] Checked if tokens are valid: true, expires at: 1766708177012
+[debug] [2025-12-25T23:17:53.503Z] Checked if tokens are valid: true, expires at: 1766708177012
+[debug] [2025-12-25T23:17:53.503Z] >>> [apiv2][query] GET https://firebasedataconnect.googleapis.com/v1/projects/r-lamsal-books-backend/locations/-/services [none]
+[debug] [2025-12-25T23:17:54.121Z] <<< [apiv2][status] GET https://firebasedataconnect.googleapis.com/v1/projects/r-lamsal-books-backend/locations/-/services 200
+[debug] [2025-12-25T23:17:54.122Z] <<< [apiv2][body] GET https://firebasedataconnect.googleapis.com/v1/projects/r-lamsal-books-backend/locations/-/services {}
+[debug] [2025-12-25T23:17:54.134Z] Checked if tokens are valid: true, expires at: 1766708177012
+[debug] [2025-12-25T23:17:54.134Z] Checked if tokens are valid: true, expires at: 1766708177012
+[debug] [2025-12-25T23:17:54.134Z] >>> [apiv2][query] GET https://cloudbilling.googleapis.com/v1/projects/r-lamsal-books-backend/billingInfo [none]
+[debug] [2025-12-25T23:17:54.377Z] <<< [apiv2][status] GET https://cloudbilling.googleapis.com/v1/projects/r-lamsal-books-backend/billingInfo 200
+[debug] [2025-12-25T23:17:54.378Z] <<< [apiv2][body] GET https://cloudbilling.googleapis.com/v1/projects/r-lamsal-books-backend/billingInfo {"name":"projects/r-lamsal-books-backend/billingInfo","projectId":"r-lamsal-books-backend","billingAccountName":"","billingEnabled":false}
+[debug] [2025-12-25T23:17:54.378Z] Checked if tokens are valid: true, expires at: 1766708177012
+[debug] [2025-12-25T23:17:54.379Z] Checked if tokens are valid: true, expires at: 1766708177012
+[debug] [2025-12-25T23:17:54.381Z] >>> [apiv2][query] GET https://monitoring.googleapis.com/v3/projects/r-lamsal-books-backend/timeSeries/ filter=metric.type%3D%22serviceruntime.googleapis.com%2Fquota%2Fallocation%2Fusage%22+AND+metric.label.quota_metric+%3D+%22sqladmin.googleapis.com%2Ffdc_lifetime_free_trial_per_project%22&interval.endTime=2025-12-25T23%3A17%3A54.378Z&interval.startTime=2025-12-18T23%3A17%3A54.378Z
+[debug] [2025-12-25T23:17:55.522Z] <<< [apiv2][status] GET https://monitoring.googleapis.com/v3/projects/r-lamsal-books-backend/timeSeries/ 200
+[debug] [2025-12-25T23:17:55.522Z] <<< [apiv2][body] GET https://monitoring.googleapis.com/v3/projects/r-lamsal-books-backend/timeSeries/ {"unit":"1"}
+[warn] ⚠  dataconnect: Cannot detect an existing app in the current directory. 
+[info] i  dataconnect: > npx create-next-app@latest web-app --ts --eslint --tailwind --src-dir --app --turbopack --import-alias "@/*" --skip-install 
+[error] ⬢  dataconnect: Failed to create a next app template 
+[debug] [2025-12-25T23:18:00.210Z] Checked if tokens are valid: true, expires at: 1766708177012
+[debug] [2025-12-25T23:18:00.210Z] Checked if tokens are valid: true, expires at: 1766708177012
+[debug] [2025-12-25T23:18:00.211Z] >>> [apiv2][query] GET https://firebasedataconnect.googleapis.com/v1/projects/r-lamsal-books-backend/locations/us-east4/services/rlamsalbooksandstationary/schemas pageSize=100&pageToken=&fields=schemas.name%2Cschemas.datasources%2Cschemas.source
+[debug] [2025-12-25T23:18:00.574Z] <<< [apiv2][status] GET https://firebasedataconnect.googleapis.com/v1/projects/r-lamsal-books-backend/locations/us-east4/services/rlamsalbooksandstationary/schemas 404
+[debug] [2025-12-25T23:18:00.575Z] <<< [apiv2][body] GET https://firebasedataconnect.googleapis.com/v1/projects/r-lamsal-books-backend/locations/us-east4/services/rlamsalbooksandstationary/schemas {"error":{"code":404,"message":"Resource 'services/rlamsalbooksandstationary' was not found","status":"NOT_FOUND","details":[{"@type":"type.googleapis.com/google.rpc.ResourceInfo","resourceName":"services/rlamsalbooksandstationary"}]}}
+[info] ✔  Wrote dataconnect/dataconnect.yaml 
+[info] ✔  Wrote dataconnect/seed_data.gql 
+[info] ✔  Wrote dataconnect/schema/schema.gql 
+[info] ✔  Wrote dataconnect/example/connector.yaml 
+[info] ✔  Wrote dataconnect/example/queries.gql 
+[info] ✔  Wrote dataconnect/example/mutations.gql 
+[info] i  dataconnect: No apps to setup Data Connect Generated SDKs 
+[info] 
+=== Firestore Setup
+[info] i  firestore: ensuring required API firestore.googleapis.com is enabled... 
+[debug] [2025-12-25T23:18:00.588Z] Checked if tokens are valid: true, expires at: 1766708177012
+[debug] [2025-12-25T23:18:00.588Z] Checked if tokens are valid: true, expires at: 1766708177012
+[debug] [2025-12-25T23:18:00.588Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/r-lamsal-books-backend/services/firestore.googleapis.com [none]
+[debug] [2025-12-25T23:18:00.588Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/r-lamsal-books-backend/services/firestore.googleapis.com x-goog-quota-user=projects/r-lamsal-books-backend
+[debug] [2025-12-25T23:18:00.901Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/r-lamsal-books-backend/services/firestore.googleapis.com 200
+[debug] [2025-12-25T23:18:00.901Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/r-lamsal-books-backend/services/firestore.googleapis.com [omitted]
+[info] ✔  firestore: required API firestore.googleapis.com is enabled 
+[debug] [2025-12-25T23:18:00.911Z] Checked if tokens are valid: true, expires at: 1766708177012
+[debug] [2025-12-25T23:18:00.911Z] Checked if tokens are valid: true, expires at: 1766708177012
+[debug] [2025-12-25T23:18:00.912Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/r-lamsal-books-backend/databases [none]
+[debug] [2025-12-25T23:18:01.493Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/r-lamsal-books-backend/databases 200
+[debug] [2025-12-25T23:18:01.494Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/r-lamsal-books-backend/databases {"databases":[{"name":"projects/r-lamsal-books-backend/databases/(default)","uid":"b9671a7b-d2c1-44da-9377-9c51b5d0c935","createTime":"2025-12-24T20:45:39.169614Z","updateTime":"2025-12-24T20:45:39.169614Z","locationId":"asia-south2","type":"FIRESTORE_NATIVE","concurrencyMode":"PESSIMISTIC","versionRetentionPeriod":"3600s","earliestVersionTime":"2025-12-25T22:18:01.522130Z","appEngineIntegrationMode":"DISABLED","pointInTimeRecoveryEnablement":"POINT_IN_TIME_RECOVERY_DISABLED","deleteProtectionState":"DELETE_PROTECTION_DISABLED","databaseEdition":"STANDARD","freeTier":true,"realtimeUpdatesMode":"REALTIME_UPDATES_MODE_ENABLED","etag":"IKKU1Ofv2ZEDMNPk65+O15ED"}]}
+[info] 
+[info] Firestore Security Rules allow you to define how and when to allow
+[info] requests. You can keep these rules in your project directory
+[info] and publish them with firebase deploy.
+[info] 
