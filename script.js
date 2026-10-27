@@ -1,234 +1,242 @@
-// Basic Interactivity
-import { db, collection, addDoc, auth, onAuthStateChanged, signOut } from './firebase-config.js';
+import { CATEGORIES, PRODUCTS } from './products.js';
+
+const WHATSAPP_NUMBER = '9779846055675';
+
+function whatsappLink(message) {
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Auth State Listener
-    onAuthStateChanged(auth, (user) => {
-        const loginLink = document.querySelector('a[href="login.html"]');
-        if (user && loginLink) {
-            // User is signed in
-            loginLink.href = "#";
-            loginLink.innerHTML = `👋 Hi, ${user.email.split('@')[0]}`;
-            loginLink.title = "Click to Logout";
-            loginLink.style.color = "#4CAF50";
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-            // Logout functionality
-            loginLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                if (confirm("Do you want to logout?")) {
-                    signOut(auth).then(() => {
-                        window.location.reload();
-                    });
-                }
-            });
+    // Mobile Menu
+    const menuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.getElementById('navLinks');
 
-            // If Admin, add Admin Link
-            if (user.email === 'admin@rlamsal.com') { // Hardcoded admin check
-                const nav = document.querySelector('.nav-links');
-                // Check if admin link already exists to prevent duplicates
-                if (!document.querySelector('a[href="admin.html"]')) {
-                    const adminLi = document.createElement('li');
-                    adminLi.innerHTML = '<a href="admin.html" style="color:#FF6600; font-weight:bold">Admin Panel</a>';
-                    nav.appendChild(adminLi);
-                }
-            }
-        }
-    });
+    const setMenuOpen = (open) => {
+        navLinks.classList.toggle('open', open);
+        menuBtn.classList.toggle('open', open);
+        menuBtn.setAttribute('aria-expanded', String(open));
+    };
+
+    menuBtn.addEventListener('click', () => setMenuOpen(!navLinks.classList.contains('open')));
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenuOpen(false)));
 
     // Modal Logic
     const galleryModal = document.getElementById('galleryModal');
-    const reviewModal = document.getElementById('reviewModal');
-    const closeBtns = document.querySelectorAll('.close-modal, .close-modal-review');
     const modalTitle = document.getElementById('modalTitle');
-    const modalGallery = document.getElementById('modalGallery');
 
-    // Image Data Map (Generated from local file listing)
-    const galleryData = {
-        'birthday': [
-            'BirthDay Gifts/WhatsApp Image 2025-12-10 at 22.20.47.jpeg'
-        ],
-        'kids': [
-            'KIDS/WhatsApp Image 2025-12-10 at 22.20.46.jpeg',
-            'KIDS/WhatsApp Image 2025-12-10 at 22.20.56 (1).jpeg',
-            'KIDS/WhatsApp Image 2025-12-10 at 22.20.56.jpeg',
-            'KIDS/WhatsApp Image 2025-12-10 at 22.20.58 (1).jpeg',
-            'KIDS/WhatsApp Image 2025-12-10 at 22.20.59.jpeg'
-        ],
-        'stationery': [
-            'Regular Stationary /WhatsApp Image 2025-12-10 at 22.20.49 (1).jpeg',
-            'Regular Stationary /WhatsApp Image 2025-12-10 at 22.20.49.jpeg',
-            'Regular Stationary /WhatsApp Image 2025-12-10 at 22.20.52.jpeg',
-            'Regular Stationary /WhatsApp Image 2025-12-10 at 22.20.53.jpeg',
-            'Regular Stationary /WhatsApp Image 2025-12-10 at 22.20.55.jpeg',
-            'Regular Stationary /WhatsApp Image 2025-12-10 at 22.20.58.jpeg'
-        ],
-        'games': [
-            'GAMES/WhatsApp Image 2025-12-10 at 22.20.50.jpeg'
-        ],
-        'books': [
-            'books/book_2.png',
-            'books/book_3.png',
-            'books/book_4.png',
-            'books/book_5.png',
-            'books/book_6.png',
-            'books/book_7.png',
-            'books/book_8.png',
-            'books/book_9.png',
-            'books/book_10.png',
-            'books/book_11.png',
-            'books/book_12.png'
-        ]
+    const openModal = (modal) => {
+        modal.classList.add('active');
+        document.body.classList.add('modal-open');
+        modal.querySelector('.close-modal').focus();
     };
 
-    // Function to open Gallery Modal
-    window.openGallery = (category) => {
-        let title = '';
+    const closeModals = () => {
+        galleryModal.classList.remove('active');
+        document.body.classList.remove('modal-open');
+    };
 
-        switch (category) {
-            case 'birthday': title = 'Birthday Gifts'; break;
-            case 'kids': title = 'Kids Corner'; break;
-            case 'stationery': title = 'Regular Stationery'; break;
-            case 'games': title = 'Games & Sports'; break;
-            case 'books': title = 'Books Collection'; break;
-        }
+    // Products
+    const productGrid = document.getElementById('productGrid');
+    const productEmpty = document.getElementById('productEmpty');
+    const productSearch = document.getElementById('productSearch');
+    const filterBar = document.getElementById('categoryFilters');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxDesc = document.getElementById('lightboxDesc');
+    const lightboxActions = document.getElementById('lightboxActions');
+    let activeCategory = 'all';
 
-        modalTitle.innerText = title;
-        modalGallery.innerHTML = ''; // Clear previous
+    // Pre-fill the stock inquiry form and take the customer there
+    const askInStore = (productName) => {
+        closeModals();
+        const stockForm = document.getElementById('stockForm');
+        stockForm.item.value = productName;
+        document.getElementById('stock-inquiry').scrollIntoView({ behavior: 'smooth' });
+        stockForm.name.focus({ preventScroll: true });
+    };
 
-        const images = galleryData[category] || [];
+    const productActions = (product) => {
+        const wrap = document.createElement('div');
+        wrap.className = 'product-actions';
 
-        if (images.length === 0) {
-            const msg = document.createElement('p');
-            msg.style.gridColumn = "1 / -1";
-            msg.style.textAlign = "center";
-            msg.style.color = "#666";
-            msg.innerText = "No images available for this category yet.";
-            modalGallery.appendChild(msg);
+        const ask = document.createElement('button');
+        ask.type = 'button';
+        ask.className = 'btn btn-sm btn-primary';
+        ask.textContent = 'Check stock';
+        ask.addEventListener('click', () => askInStore(product.name));
+
+        const wa = document.createElement('a');
+        wa.className = 'btn btn-sm btn-whatsapp';
+        wa.href = whatsappLink(`Namaste! Do you have "${product.name}" in stock?`);
+        wa.target = '_blank';
+        wa.rel = 'noopener';
+        wa.textContent = 'WhatsApp';
+
+        wrap.append(ask, wa);
+        return wrap;
+    };
+
+    const openProduct = (product) => {
+        lightboxImg.src = product.image;
+        lightboxImg.alt = product.name;
+        modalTitle.textContent = product.name;
+        lightboxDesc.textContent = [product.author, product.description].filter(Boolean).join(' · ');
+        lightboxActions.replaceChildren(...productActions(product).children);
+        openModal(galleryModal);
+    };
+
+    const renderProductCard = (product) => {
+        const card = document.createElement('article');
+        card.className = 'product-card';
+
+        const media = document.createElement(product.image ? 'button' : 'div');
+        media.className = 'product-image';
+        if (product.image) {
+            media.type = 'button';
+            media.setAttribute('aria-label', `View larger photo of ${product.name}`);
+            const img = document.createElement('img');
+            img.src = product.image;
+            img.alt = product.name;
+            img.loading = 'lazy';
+            img.decoding = 'async';
+            img.onerror = () => {
+                media.classList.add('no-photo');
+                media.textContent = CATEGORIES[product.category].icon;
+            };
+            media.appendChild(img);
+            media.addEventListener('click', () => openProduct(product));
         } else {
-            images.forEach(imgSrc => {
-                const item = document.createElement('div');
-                item.className = 'gallery-item';
-
-                const img = document.createElement('img');
-                // Encode URI components to handle spaces and special chars
-                const parts = imgSrc.split('/');
-                const encodedPath = parts.map(part => encodeURIComponent(part)).join('/');
-
-                img.src = encodedPath;
-                img.alt = title + ' Image';
-                img.loading = 'lazy'; // Improve performance
-
-                // Add error handling for broken images
-                img.onerror = function () {
-                    this.parentElement.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;background:#f0f0f0;color:#888;font-size:0.8rem;padding:10px;text-align:center;">Image not found<br>' + imgSrc + '</div>';
-                };
-
-                item.appendChild(img);
-                modalGallery.appendChild(item);
-            });
+            media.classList.add('no-photo');
+            media.textContent = CATEGORIES[product.category].icon;
         }
 
-        galleryModal.classList.add('active');
+        const body = document.createElement('div');
+        body.className = 'product-body';
+
+        const tag = document.createElement('span');
+        tag.className = 'product-tag';
+        tag.textContent = CATEGORIES[product.category].label;
+
+        const name = document.createElement('h3');
+        name.textContent = product.name;
+
+        body.append(tag, name);
+
+        if (product.author) {
+            const author = document.createElement('p');
+            author.className = 'product-author';
+            author.textContent = product.author;
+            body.appendChild(author);
+        }
+
+        const desc = document.createElement('p');
+        desc.className = 'product-desc';
+        desc.textContent = product.description;
+
+        body.append(desc, productActions(product));
+        card.append(media, body);
+        return card;
     };
 
-    // Attach click events to category cards
-    document.querySelectorAll('.category-card').forEach(card => {
-        card.addEventListener('click', () => {
-            const category = card.getAttribute('data-category');
-            window.openGallery(category);
-        });
-    });
+    const renderProducts = () => {
+        const term = productSearch.value.trim().toLowerCase();
+        const matches = PRODUCTS.filter(p =>
+            (activeCategory === 'all' || p.category === activeCategory) &&
+            (!term || [p.name, p.author, p.description, CATEGORIES[p.category].label]
+                .filter(Boolean).join(' ').toLowerCase().includes(term))
+        );
+        productGrid.replaceChildren(...matches.map(renderProductCard));
+        productEmpty.hidden = matches.length > 0;
+    };
 
-    // Review Modal
-    window.openReviewModal = () => {
-        reviewModal.classList.add('active');
-    }
+    const addChip = (key, label) => {
+        const chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'chip' + (key === activeCategory ? ' active' : '');
+        chip.textContent = label;
+        chip.setAttribute('aria-pressed', String(key === activeCategory));
+        chip.addEventListener('click', () => {
+            activeCategory = key;
+            filterBar.querySelectorAll('.chip').forEach(c => {
+                c.classList.toggle('active', c === chip);
+                c.setAttribute('aria-pressed', String(c === chip));
+            });
+            renderProducts();
+        });
+        filterBar.appendChild(chip);
+    };
+
+    addChip('all', 'All');
+    Object.entries(CATEGORIES).forEach(([key, cat]) => addChip(key, `${cat.icon} ${cat.label}`));
+    productSearch.addEventListener('input', renderProducts);
+    document.getElementById('askMissing').addEventListener('click', (e) => {
+        e.preventDefault();
+        askInStore(productSearch.value.trim());
+    });
+    renderProducts();
 
     // Close Modals
-    closeBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            galleryModal.classList.remove('active');
-            reviewModal.classList.remove('active');
-        });
-    });
+    document.querySelectorAll('.close-modal').forEach(btn => btn.addEventListener('click', closeModals));
 
     // Close on outside click
     window.addEventListener('click', (e) => {
-        if (e.target == galleryModal) galleryModal.classList.remove('active');
-        if (e.target == reviewModal) reviewModal.classList.remove('active');
+        if (e.target === galleryModal) closeModals();
     });
 
-    // Import Firebase functions from config - MOVED TO TOP
-    // import { db, collection, addDoc } from './firebase-config.js';
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeModals();
+            setMenuOpen(false);
+        }
+    });
+
+    // Arrival date can't be in the past
+    const arrivalDate = document.querySelector('#arrivalForm [name="arrivalDate"]');
+    arrivalDate.min = toLocalDateString(new Date());
 
     // Form Handling
-    const forms = document.querySelectorAll('form');
-    forms.forEach(form => {
-        form.addEventListener('submit', async (e) => {
+    // No server: each form turns into a WhatsApp message to the shop, ready to send.
+    const formMessages = {
+        stock: (f) => [
+            'Namaste! Do you have this in stock?',
+            `Item: ${f.item}`,
+            `Name: ${f.name}`
+        ],
+        request: (f) => [
+            'Namaste! Can you bring in this item for me?',
+            `Item: ${f.item}`,
+            f.details && `Details: ${f.details}`,
+            `Name: ${f.name}`
+        ],
+        arrival: (f) => [
+            "Namaste! I'm coming to the shop.",
+            `Name: ${f.name}`,
+            `When: ${f.arrivalDate} at ${f.arrivalTime}`,
+            f.items && `Please keep ready: ${f.items}`
+        ]
+    };
+
+    document.querySelectorAll('form[data-kind]').forEach(form => {
+        form.addEventListener('submit', (e) => {
             e.preventDefault();
-            const btn = form.querySelector('button');
-            const originalText = btn.innerText;
+            const fields = {};
+            new FormData(form).forEach((value, key) => fields[key] = String(value).trim());
 
-            // Collect form data
-            const formData = new FormData(form);
-            const data = {};
-            formData.forEach((value, key) => data[key] = value);
+            const message = formMessages[form.dataset.kind](fields).filter(Boolean).join('\n');
+            window.open(whatsappLink(message), '_blank', 'noopener');
 
-            // Add inputs manually if not using name attributes (which we should enable in HTML for FormData to work best, 
-            // but for now we'll grab by type or just grab all inputs)
-            const inputs = form.querySelectorAll('input, textarea, select');
-            inputs.forEach(input => {
-                if (input.placeholder || input.name) {
-                    let key = input.name || input.placeholder || 'field';
-                    // Sanitize key
-                    key = key.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
-                    data[key] = input.value;
-                }
-            });
-
-            // Add timestamp
-            data.timestamp = new Date();
-
-            try {
-                btn.innerText = 'Sending...';
-
-                // Check if config is still placeholder
-                // We can't easily check the export here without importing config, but errors will be caught.
-
-                // Determine collection name based on form ID
-                let collectionName = 'general_requests';
-                if (form.id === 'stockForm') collectionName = 'stock_inquiries';
-                if (form.id === 'requestForm') collectionName = 'item_requests';
-                if (form.id === 'arrivalForm') collectionName = 'arrival_notifications';
-                if (form.id === 'reviewForm') collectionName = 'reviews';
-
-                // Send to Firestore
-                await addDoc(collection(db, collectionName), data);
-
-                // Success feedback
-                btn.innerText = 'Sent!';
-                btn.style.background = '#4CAF50';
-                btn.style.borderColor = '#4CAF50';
-
-                setTimeout(() => {
-                    btn.innerText = originalText;
-                    btn.style.background = '';
-                    btn.style.borderColor = '';
-                    form.reset();
-                    if (form.closest('.modal')) {
-                        form.closest('.modal').classList.remove('active');
-                    }
-                }, 2000);
-
-                console.log(`Data sent to ${collectionName}:`, data);
-
-            } catch (error) {
-                console.error("Error adding document: ", error);
-                alert("Error sending data. \n\nMake sure you have added your Firebase API Keys in firebase-config.js! \n\nCheck console for details.");
-                btn.innerText = 'Failed';
-                setTimeout(() => btn.innerText = originalText, 3000);
-            }
+            const status = form.querySelector('.form-status');
+            status.textContent = 'WhatsApp opened with your message. Tap send and we\'ll reply there.';
+            status.className = 'form-status success';
+            form.reset();
+            setTimeout(() => { status.textContent = ''; status.className = 'form-status'; }, 8000);
         });
     });
 });
+
+function toLocalDateString(date) {
+    const pad = (n) => String(n).padStart(2, '0');
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+}

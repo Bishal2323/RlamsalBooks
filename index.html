@@ -11,7 +11,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <!-- Firebase SDKs will be loaded here later -->
 </head>
 
 <body>
@@ -19,19 +18,19 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container nav-container">
-            <a href="#" class="logo">R. Lamsal Books</a>
-            <button class="mobile-menu-btn" aria-label="Toggle menu">
+            <a href="#home" class="logo">R. Lamsal Books</a>
+            <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
-            <ul class="nav-links">
+            <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#categories">Products</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#reviews">Reviews</a></li>
-                <li><a href="#footer">Contact</a></li>
-                <li><a href="login.html" style="color: var(--primary); font-weight: bold;">Login</a></li>
+                <li><a href="#visit">Find Us</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
     </nav>
@@ -41,7 +40,7 @@
         <div class="container hero-content">
             <span class="badge">Serving Pokhara since 2013</span>
             <h1>Your Trusted Local Stationery & Book House</h1>
-            <p>From school essentials to special gifts, finding what you need has never been easier. Order online, pick
+            <p>From school essentials to special gifts, finding what you need has never been easier. Ask online, pick
                 up in-store.</p>
             <div class="hero-buttons">
                 <a href="#categories" class="btn btn-primary">Browse Products</a>
@@ -53,19 +52,21 @@
                     <div>
                         <h3>Visit Us</h3>
                         <p>Rastra Bank Rd, Pokhara 33700</p>
+                        <a class="info-link" href="#visit">See map &rarr;</a>
                     </div>
                 </div>
                 <div class="info-card">
                     <div class="icon">📞</div>
                     <div>
                         <h3>Call Us</h3>
-                        <p>+977 98460 55675</p>
+                        <p><a href="tel:+9779846055675">+977 98460 55675</a></p>
+                        <a class="info-link" href="https://wa.me/9779846055675" target="_blank" rel="noopener">Chat on WhatsApp &rarr;</a>
                     </div>
                 </div>
                 <div class="info-card">
                     <div class="icon">🕒</div>
                     <div>
-                        <h3>Open Daily</h3>
+                        <h3>Opening Hours</h3>
                         <p>8:00 AM - 8:00 PM (Closed Sun)</p>
                     </div>
                 </div>
@@ -73,56 +74,26 @@
         </div>
     </header>
 
-    <!-- Product Categories -->
+    <!-- Products -->
     <section id="categories" class="section">
         <div class="container">
             <div class="section-header">
                 <h2>Browse Our Collection</h2>
-                <p>Everything you need, organized for you.</p>
+                <p>A few things from our shelves. Don't see it? Ask us, we probably have it or can get it.</p>
             </div>
-            <div class="category-grid">
-                <!-- Category Cards -->
-                <div class="category-card" data-category="birthday">
-                    <div class="card-image placeholder-orange">🎁</div>
-                    <div class="card-content">
-                        <h3>Birthday Gifts</h3>
-                        <p>Cards, decorations, and special surprises.</p>
-                        <span class="link-text">View Gallery &rarr;</span>
-                    </div>
+            <div class="product-toolbar">
+                <div class="filter-chips" id="categoryFilters" role="group" aria-label="Filter by category">
+                    <!-- Category chips are added by script.js -->
                 </div>
-                <div class="category-card" data-category="kids">
-                    <div class="card-image placeholder-blue">🧸</div>
-                    <div class="card-content">
-                        <h3>Kids Corner</h3>
-                        <p>Early learning toys and school essentials.</p>
-                        <span class="link-text">View Gallery &rarr;</span>
-                    </div>
-                </div>
-                <div class="category-card" data-category="stationery">
-                    <div class="card-image placeholder-green">✏️</div>
-                    <div class="card-content">
-                        <h3>Regular Stationery</h3>
-                        <p>Office supplies, notebooks, and pens.</p>
-                        <span class="link-text">View Gallery &rarr;</span>
-                    </div>
-                </div>
-                <div class="category-card" data-category="games">
-                    <div class="card-image placeholder-red">⚽</div>
-                    <div class="card-content">
-                        <h3>Games & Sports</h3>
-                        <p>Rubik's cubes, footballs, volleyballs.</p>
-                        <span class="link-text">View Gallery &rarr;</span>
-                    </div>
-                </div>
-                <div class="category-card" data-category="books">
-                    <div class="card-image placeholder-yellow">📚</div>
-                    <div class="card-content">
-                        <h3>Books</h3>
-                        <p>Fiction, non-fiction, and study guides (Class 8-10).</p>
-                        <span class="link-text">View Gallery &rarr;</span>
-                    </div>
-                </div>
+                <input type="search" id="productSearch" class="product-search" placeholder="Search books, notebooks, gifts..." aria-label="Search products">
             </div>
+            <div class="product-grid" id="productGrid">
+                <!-- Product cards are added by script.js -->
+            </div>
+            <p class="product-empty" id="productEmpty" hidden>
+                No match on the website, but we may still have it.
+                <a href="#stock-inquiry" id="askMissing">Ask us about it &rarr;</a>
+            </p>
         </div>
     </section>
 
@@ -131,7 +102,7 @@
         <div class="container">
             <div class="section-header">
                 <h2>How Can We Help?</h2>
-                <p>Use our digital services to save time.</p>
+                <p>Fill in a form and it opens WhatsApp with your message ready to send. We'll reply there.</p>
             </div>
 
             <div class="services-grid">
@@ -139,11 +110,11 @@
                 <div class="service-box" id="stock-inquiry">
                     <h3>🔍 Do We Have It?</h3>
                     <p>Ask about stock availability before you visit.</p>
-                    <form id="stockForm" class="app-form">
-                        <input type="text" placeholder="Item Name / Description" required>
-                        <input type="text" placeholder="Your Name" required>
-                        <input type="tel" placeholder="Phone Number" required>
+                    <form id="stockForm" class="app-form" data-kind="stock">
+                        <input type="text" name="item" placeholder="Item Name / Description" aria-label="Item name or description" maxlength="200" required>
+                        <input type="text" name="name" placeholder="Your Name" aria-label="Your name" maxlength="80" autocomplete="name" required>
                         <button type="submit" class="btn btn-primary">Check Stock</button>
+                        <p class="form-status" role="status"></p>
                     </form>
                 </div>
 
@@ -151,10 +122,12 @@
                 <div class="service-box">
                     <h3>🛍️ New Item Request</h3>
                     <p>Need something specific? We'll bring it for you.</p>
-                    <form id="requestForm" class="app-form">
-                        <input type="text" placeholder="What item do you need?" required>
-                        <textarea placeholder="Any specific details (brand, color, etc.)?"></textarea>
+                    <form id="requestForm" class="app-form" data-kind="request">
+                        <input type="text" name="item" placeholder="What item do you need?" aria-label="Item you need" maxlength="200" required>
+                        <textarea name="details" placeholder="Any specific details (brand, color, etc.)?" aria-label="Details" maxlength="1000"></textarea>
+                        <input type="text" name="name" placeholder="Your Name" aria-label="Your name" maxlength="80" autocomplete="name" required>
                         <button type="submit" class="btn btn-secondary">Request Item</button>
+                        <p class="form-status" role="status"></p>
                     </form>
                 </div>
 
@@ -162,14 +135,23 @@
                 <div class="service-box">
                     <h3>🏃 I'm Coming Soon</h3>
                     <p>Let us know when you're arriving so we can be ready.</p>
-                    <form id="arrivalForm" class="app-form">
-                        <input type="text" placeholder="Your Name" required>
-                        <input type="time" required>
-                        <textarea placeholder="List items to prepare..."></textarea>
+                    <form id="arrivalForm" class="app-form" data-kind="arrival">
+                        <input type="text" name="name" placeholder="Your Name" aria-label="Your name" maxlength="80" autocomplete="name" required>
+                        <div class="form-row">
+                            <label>Date
+                                <input type="date" name="arrivalDate" required>
+                            </label>
+                            <label>Time
+                                <input type="time" name="arrivalTime" min="08:00" max="20:00" required>
+                            </label>
+                        </div>
+                        <textarea name="items" placeholder="List items to prepare..." aria-label="Items to prepare" maxlength="1000"></textarea>
                         <button type="submit" class="btn btn-outline">Notify Shop</button>
+                        <p class="form-status" role="status"></p>
                     </form>
                 </div>
             </div>
+            <p class="privacy-note">Nothing is stored on this website. Your message goes straight to our WhatsApp.</p>
         </div>
     </section>
 
@@ -177,12 +159,52 @@
     <section id="reviews" class="section">
         <div class="container">
             <div class="section-header">
-                <h2>Community Reviews</h2>
-                <button class="btn btn-sm btn-outline" onclick="openReviewModal()">Write a Review</button>
+                <h2>What Customers Say</h2>
+                <p>Our reviews live on Google Maps.</p>
             </div>
-            <div class="reviews-wrapper">
-                <!-- Reviews will be populated by JS -->
-                <p class="text-center text-muted">Loading reviews...</p>
+            <div class="google-reviews">
+                <p class="google-rating"><span class="review-stars" aria-hidden="true">★★★★★</span> Rated 5.0 on Google</p>
+                <div class="visit-buttons">
+                    <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&query=Lamsal%20Books%20%26%20Stationery%2C%20Rastra%20Bank%20Rd%2C%20Pokhara" target="_blank" rel="noopener">Read &amp; Write a Review</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visit Us / Map -->
+    <section id="visit" class="section bg-light">
+        <div class="container">
+            <div class="section-header">
+                <h2>Visit the Shop</h2>
+                <p>Rastra Bank Rd, Pokhara 33700</p>
+            </div>
+            <div class="visit-grid">
+                <div class="map-frame">
+                    <iframe
+                        src="https://maps.google.com/maps?q=R.%20Lamsal%20Books%20and%20Stationery%2C%20Rastra%20Bank%20Rd%2C%20Pokhara&z=17&output=embed"
+                        title="Map showing R. Lamsal Books & Stationery on Rastra Bank Rd, Pokhara"
+                        loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+                </div>
+                <div class="visit-info">
+                    <div>
+                        <h3>📍 Address</h3>
+                        <p>R. Lamsal Books & Stationery<br>Rastra Bank Rd, Pokhara 33700, Nepal</p>
+                    </div>
+                    <div>
+                        <h3>🕒 Opening Hours</h3>
+                        <p>8:00 AM - 8:00 PM (Closed Sun)</p>
+                    </div>
+                    <div>
+                        <h3>📞 Contact</h3>
+                        <p><a href="tel:+9779846055675">+977 98460 55675</a><br>
+                            <a href="mailto:rlamsalbooks@gmail.com">rlamsalbooks@gmail.com</a></p>
+                    </div>
+                    <div class="visit-buttons">
+                        <a class="btn btn-primary" target="_blank" rel="noopener"
+                            href="https://www.google.com/maps/dir/?api=1&destination=R.%20Lamsal%20Books%20and%20Stationery%2C%20Rastra%20Bank%20Rd%2C%20Pokhara">Get Directions</a>
+                        <a class="btn btn-whatsapp" href="https://wa.me/9779846055675" target="_blank" rel="noopener">WhatsApp Us</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -196,8 +218,9 @@
             </div>
             <div class="footer-col">
                 <h4>Contact</h4>
-                <p>Email: rlamsalbooks@gmail.com</p>
-                <p>Phone: +977 98460 55675</p>
+                <p>Email: <a class="inline-link" href="mailto:rlamsalbooks@gmail.com">rlamsalbooks@gmail.com</a></p>
+                <p>Phone: <a class="inline-link" href="tel:+9779846055675">+977 98460 55675</a></p>
+                <p>WhatsApp: <a class="inline-link" href="https://wa.me/9779846055675" target="_blank" rel="noopener">Chat with us</a></p>
                 <p>Location: Rastra Bank Rd, Pokhara 33700</p>
             </div>
             <div class="footer-col">
@@ -205,48 +228,31 @@
                 <a href="#home">Home</a>
                 <a href="#categories">Products</a>
                 <a href="#services">Services</a>
+                <a href="#visit">Find Us</a>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 R. Lamsal Books & Stationery. All rights reserved.</p>
+            <p>&copy; <span id="year">2026</span> R. Lamsal Books & Stationery. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- Gallery Modal -->
-    <div id="galleryModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2 id="modalTitle">Category Name</h2>
-            <div class="gallery-grid" id="modalGallery">
-                <!-- Images will be injected here -->
-            </div>
+    <!-- Product Image Modal -->
+    <div id="galleryModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-content lightbox">
+            <button type="button" class="close-modal" aria-label="Close">&times;</button>
+            <img id="lightboxImg" src="" alt="">
+            <h2 id="modalTitle">Product</h2>
+            <p id="lightboxDesc" class="text-muted"></p>
+            <div class="product-actions" id="lightboxActions"></div>
         </div>
     </div>
 
-    <!-- Review Modal -->
-    <div id="reviewModal" class="modal">
-        <div class="modal-content small-modal">
-            <span class="close-modal-review">&times;</span>
-            <h2>Write a Review</h2>
-            <form id="reviewForm" class="app-form">
-                <input type="text" placeholder="Your Name" required>
-                <div class="star-rating">
-                    <!-- Simple star input placeholder -->
-                    <select required>
-                        <option value="5">★★★★★ Excellent</option>
-                        <option value="4">★★★★☆ Good</option>
-                        <option value="3">★★★☆☆ Average</option>
-                        <option value="2">★★☆☆☆ Poor</option>
-                        <option value="1">★☆☆☆☆ Terrible</option>
-                    </select>
-                </div>
-                <textarea placeholder="Share your experience..." required></textarea>
-                <button type="submit" class="btn btn-primary">Submit Review</button>
-            </form>
-        </div>
-    </div>
+    <!-- Floating WhatsApp button -->
+    <a class="whatsapp-float" href="https://wa.me/9779846055675?text=Namaste%2C%20I%20have%20a%20question%20for%20R.%20Lamsal%20Books." target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16.04 3C9.4 3 4 8.4 4 15.04c0 2.12.55 4.19 1.6 6.02L4 29l8.13-1.57a12 12 0 0 0 3.91.65h.01C22.68 28.08 28 22.68 28 16.04 28 9.4 22.68 3 16.04 3zm0 22.9h-.01c-1.2 0-2.38-.24-3.48-.7l-.25-.1-4.83.93.95-4.7-.16-.26a9.9 9.9 0 0 1-1.5-5.03c0-5.48 4.46-9.94 9.29-9.94 5.48 0 9.94 4.46 9.94 9.94 0 5.48-4.46 9.86-9.95 9.86zm5.45-7.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.27.49 1.7.63.71.23 1.36.2 1.88.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35z"/></svg>
+        <span>WhatsApp</span>
+    </a>
 
-    <script type="module" src="firebase-config.js"></script>
     <script type="module" src="script.js"></script>
 </body>
 
